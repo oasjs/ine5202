@@ -39,7 +39,7 @@ function q1_routine(num)
                                         repmat(' ', 1, 26),
                                         repmat(' ', 1, 25));
     printf("\n");
-    printf("Erro percentual de arredondamento: %.2f%%\n", rounding_error(num));
+    printf("Erro percentual de arredondamento: %f%%\n", rounding_error(num));
 
 endfunction
 
@@ -57,9 +57,7 @@ function b = fill_binary(bin, f)
 endfunction
 
 function err = rounding_error(num)
-    num_f_d = sprintf("%.20f", num);
-    num_f_s = sprintf("%.20f", single(num));
-    % num_f_d = num;
-    % num_f_s = double(single(num));
-    err = abs((num_f_s - num_f_d) / num_f_d)*100;
+    num_double = num;
+    num_single = double(single(num));
+    err = abs((num_single - num_double) / num_double)*100;
 endfunction
