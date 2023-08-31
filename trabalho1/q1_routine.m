@@ -29,7 +29,7 @@ function q1_routine(num)
                                         repmat(' ', 1, 11),
                                         repmat(' ', 1, 11));
     printf("\n")
-    printf("binario (single): %s %s %s\n",  num_bin_d(1),
+    printf("binario (double): %s %s %s\n",  num_bin_d(1),
                                             num_bin_d(2:12),
                                             num_bin_d(12:64));
     printf("%s s %se%s %sf%s\n",
