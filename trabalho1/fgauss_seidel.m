@@ -27,7 +27,7 @@ function [x, op_count] = fgauss_seidel(A, B)
     % Esse é o fator de relaxamento mais adequado para esse sistema, testado
     % empiricamente
     lambda = 1;
-    while difference > 1e-10 && k < 100
+    while difference > 1e-6 && k < 100
         k++;
         prev_x = x;
         for i = 1 : n
