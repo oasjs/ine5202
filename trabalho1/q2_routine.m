@@ -36,17 +36,22 @@ function q2_routine()
 
     n1 = 15; n2 = 25; n3 = 50;
     [A, B] = build_system(n1, n2, n3);
+
     printf("2.1\n\n");
+
+    % Soluciona o sistema pelo método direto de Gauss.
     printf("b) Solução pelo método direto de Gauss:\n\n");
     [X_gauss, op_count_gauss] = fgauss(A, B);
     X_gauss
-    printf("\n");
 
+    % Calcula o resíduo máximo.
     res = max(abs(A*X_gauss - B));
     printf("Residuo máximo: %d\n\n", res);
 
+    % Calcula o total de operações.
     printf("c) Total de operaçoes: %d\n\n", op_count_gauss);
 
+    % Testa se o sistema é convergente.
     printf("2.2\n\n");
     if is_convergent(A)
         convergence_ans = "tem convergência garantida";
@@ -55,14 +60,18 @@ function q2_routine()
     endif
     printf("a) Pelo método do cálculo da dominância da diagonal principal, podemos constatar que o sistema %s.\n\n", convergence_ans);
 
+    % Soluciona o sistema pelo método iterativo de Gauss-Seidel.
+    printf("b) Solução pelo método iterativo de Gauss-Seidel (6 digitos de precisão):\n\n");
     [X_gauss_seidel, op_count_seidel] = fgauss_seidel(A, B);
+    % Imprime a solução com 6 dígitos de precisão.
+    printf("    %.6f\n", X_gauss_seidel);
+    printf("\n");
 
-    printf("b) Solução pelo método iterativo de Gauss-Seidel:\n\n");
-    X_gauss_seidel
-
+    % Calcula o resíduo máximo.
     res = max(abs(A*X_gauss_seidel - B));
     printf("Residuo máximo: %d\n\n", res);
 
+    % Calcula o total de operações.
     printf("c) Total de operaçoes: %d\n\n", op_count_seidel);
 
 endfunction
