@@ -21,7 +21,7 @@ function [X, op_count] = fgauss(A, B)
         for i = (k + 1) : n
             aux = A(i, k) / A(k, k);
             op_count += 1;
-            for j = 1 : n + 1
+            for j = k + 1 : n + 1
                 A(i, j) = A(i, j) - aux * A(k, j);
                 op_count += 2;
             end
@@ -39,6 +39,7 @@ function [X, op_count] = fgauss(A, B)
         % coluna for zero, o sistema é indeterminado.
         if A(n, n + 1) == 0
             X(n) = 0;
+            op_count += 1;
         % Se o ultimo elemento da ultima linha for zero e o elemento da ultima
         % coluna for diferente de zero, o sistema é impossivel.
         else
