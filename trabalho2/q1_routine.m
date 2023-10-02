@@ -21,7 +21,7 @@ function q1_routine()
     [raizes_b, multiplicidade_b] = roots_aula(b)
     printf("Forma fatorada de b: ");
     for i = 1:length(raizes_b)
-        printf("(x - %f)^%d ", raizes_b(i), multiplicidade_b(i));
+        printf("(x - %f + %fi)^%d ", real(raizes_b(i)), imag(raizes_b(i)), multiplicidade_b(i));
     endfor
     printf("\n\n\n");
 
@@ -39,7 +39,9 @@ function q1_routine()
     [raizes_d, multiplicidade_d] = roots_aula(d)
     printf("Forma fatorada de d: ");
     for i = 1:length(raizes_d)
-        printf("(x - %f)^%d ", raizes_d(i), multiplicidade_d(i));
+        printf("(x - %f + %fi)^%d ",    real(raizes_d(i)),
+                                        imag(raizes_d(i)),
+                                        multiplicidade_d(i));
     endfor
     printf("\n\n\n");
 
