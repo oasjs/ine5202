@@ -28,11 +28,15 @@ function q1_routine()
     % 1b)
     newton_routine(a, b, xp, y_exato);
 
+    % 1c)
+    printf("Apesar de ambos os métodos atingirem o limiar de erro máximo com polinomios de grau 4, o método de Gregory-Newton é mais eficiente pois está mais próximo de 0.\n");
+
 
 endfunction
 
 function taylor_routine(xp, xi, y_exato)
 
+    % Funcao e derivadas
     f   = @(x) x*cos(x);
     f1  = @(x) cos(x)       - x*sin(x);
     f2  = @(x) -2*sin(x)    - x*cos(x);
@@ -42,51 +46,66 @@ function taylor_routine(xp, xi, y_exato)
     f6  = @(x) -6*sin(x)    - x*cos(x);
     f7  = @(x) -7*cos(x)    + x*sin(x);
 
+    % Coeficientes do polinomio
     c = [f(xi) / factorial(0),
         f1(xi) / factorial(1),
         f2(xi) / factorial(2),
         f3(xi) / factorial(3),
         f4(xi) / factorial(4)];
 
-    disp("Serie de Taylor")
-    disp("Grau do polinomio:")
-    grau = length(c) - 1
+    % Grau do polinomio
+    grau = length(c) - 1;
 
-    disp("Coeficientes:")
-    disp(c)
-
+    % Pontos do polinomio interpolador
     y_taylor = taylor_poly(xp, c, xi);
 
-    disp("Erro maximo:")
-    max_err = max(abs(y_exato - y_taylor))
+    % Erro maximo
+    max_err = max(abs(y_exato - y_taylor));
+
+
+    printf("Interpolação de por série de Taylor\n");
+
+    printf("Grau do polinomio: %d\n", grau);
+
+    printf("Coeficientes: ");
+    for i = 1 : length(c)
+        printf("%f ", c(i));
+    endfor
+
+    printf("\nErro máximo: %f\n", max_err);
+    printf("\n");
 
 endfunction
 
 function newton_routine(a, b, xp, y_exato)
 
     h = (b - a) / 4;        % Tamanho do intervalo
+    x = [a : h : b];        % Pontos do intervalo
+    y = x.*cos(x);          % Valores exatos
 
-    % x contendo 4 pontos equidistantes no intervalo [0, pi/2]
-    x = [a : h : b];
-
-    % y contendo os valores de f(x) nos pontos de x
-    y = x.*cos(x);
-
-    disp("Interpolacao de Gregory-Newton")
-    disp("Grau do polinomio:")
+    % Coeficientes do polinomio calculados pelo metodo de Gregory-Newton
     c = newton_coef(x, y);
-    grau = length(c) - 1
 
-    disp("Coeficientes:")
-    disp(c)
+    % Grau do polinomio
+    grau = length(c) - 1;
 
+    % Pontos do polinomio interpolador
     y_newton = newton_poly(xp, c, x);
 
-    disp("Erro maximo:")
-    max_err = max(abs(y_exato - y_newton))
+    % Erro maximo
+    max_err = max(abs(y_exato - y_newton));
 
-    % plot(xp, y_newton, 'b');
-    % while true
-    % endwhile
+
+    printf("Interpolação pelo método de Gregory-Newton\n");
+
+    printf("Grau do polinomio: %d\n", grau);
+
+    printf("Coeficientes: ");
+    for i = 1 : length(c)
+        printf("%f ", c(i));
+    endfor
+
+    printf("\nErro máximo: %f\n", max_err);
+    printf("\n");
 
 endfunction
