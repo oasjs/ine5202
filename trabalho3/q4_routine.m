@@ -32,15 +32,15 @@ function q4_routine()
     end
 
     # Marcadores
-    figure(4)
+    figure(4);
     plot(x(1,:),y(1,:),'*r','markersize',10,x(1,:),y(1,:),'--r');hold on;
     plot(x(2,:),y(2,:),'ob','markersize',10,x(2,:),y(2,:),'--b');hold on;
     plot(x(3,:),y(3,:),'sg','markersize',10,x(3,:),y(3,:),'--g');hold on;
 
     # Curvas
-    plot(xx(1,:),yy(1,:),'-r','linewidth',5)
-    plot(xx(2,:),yy(2,:),'-b','linewidth',5)
-    plot(xx(3,:),yy(3,:),'-g','linewidth',5)
+    plot(xx(1,:),yy(1,:),'-r','linewidth',5);
+    plot(xx(2,:),yy(2,:),'-b','linewidth',5);
+    plot(xx(3,:),yy(3,:),'-g','linewidth',5);
 
     hold on;
     grid on;

@@ -22,13 +22,28 @@ function q2_routine()
 
     xp = x(1):0.1:x(end);
 
-    yr = rational(x, y, xp);
+    [yr, err_r] = rational(x, y, xp);
 
-    yp = polynomial(x, y, xp);
+    [yp3, err_p] = polynomial(x, y, xp, 3);
+
+    printf('Questao 2\n\n')
+    printf('Somatorio do modulo dos desvios da funcao racional: %f\n', err_r);
+    printf('Somatorio do modulo dos desvios do polinomio: %f\n', err_p);
+    if err_r < err_p
+        best = 'racional';
+    else
+        best = 'polinomial';
+    endif
+    printf('O melhor ajuste foi o %s de grau 3, pois alem de apresentar o menor desvio nos pontos tabelados, demonstra o melhor comportamento no grafico.\n\n', best);
+
+    [yp2, err_p2] = polynomial(x, y, xp, 2);
 
     figure(2);
-    plot(x, y, 'o', xp, yr, xp, yp);
-    legend('Dados', 'Racional', 'Polinomial');
+    plot(x, y, 'o', 'LineWidth', 2,
+        xp, yr, 'LineWidth', 2,
+        xp, yp3, 'LineWidth', 2,
+        xp, yp2, 'LineWidth', 2);
+    legend('Dados', 'Racional', 'Polinomial de grau 3', 'Polinomial de grau 2');
     xlabel('x');
     ylabel('y');
     title('Ajuste de curvas');
@@ -37,7 +52,7 @@ function q2_routine()
 endfunction
 
 
-function yr = rational(x, y, xp)
+function [yr, err] = rational(x, y, xp)
 
     % Funcao racional
     g = @(a) a(1) ./ (a(2) + a(3) .* x.^2);
@@ -53,13 +68,15 @@ function yr = rational(x, y, xp)
     answer = newtonsis(ai, f, delta, 1e-12, 1000);
 
     yr = answer(1) ./ (answer(2) + answer(3) .* xp.^2);
+    err = sum(abs(g(answer) - y));
 
 endfunction
 
-function yp = polynomial(x, y, xp)
+function [yp, err] = polynomial(x, y, xp, n)
 
-    n = 3;                      % Grau do polinomio
     c = poly_ajust(x, y, n);    % Coeficientes do polinomio
+    y_comp = canon_poly(x, c);  % Polinomio avaliado em x
     yp = canon_poly(xp, c);     % Polinomio avaliado em xp
+    err = sum(abs(y_comp - y));
 
 endfunction

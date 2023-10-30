@@ -26,8 +26,8 @@ function q3_routine()
         xpp = [xpp xp]; ypp = [ypp yp];
     end
 
-    figure(3)
-    plot(x,y,'*k','markersize',20,xpp,ypp,'-m','LineWidth',5)
-    grid on
+    figure(3);
+    plot(x,y,'*k','markersize',20,xpp,ypp,'-m','LineWidth',5);
+    grid on;
 
 endfunction

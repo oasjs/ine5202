@@ -22,6 +22,8 @@ function q1_routine()
     xp = [a : h : b];       % Pontos do intervalo
     y_exato = xp.*cos(xp);  % Valores exatos
 
+    printf("Questão 1\n\n");
+
     % 1a)
     taylor_routine(xp, xi, y_exato);
 
@@ -30,7 +32,7 @@ function q1_routine()
 
     % 1c)
     printf("Apesar de ambos os métodos atingirem o limiar de erro máximo com polinomios de grau 4, o método de Gregory-Newton é mais eficiente pois está mais próximo de 0.\n");
-
+    printf("\n\n");
 
 endfunction
 
