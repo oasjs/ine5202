@@ -4,4 +4,16 @@
 
 function q2_routine()
 
+    printf("Questão 2:\n");
+
+    a = 0.1;
+    b = 1.0;
+    f = @(x) x.*log(x)./(1+cos(x));
+
+    % Simpson
+    Sn = simpson_integral(9, f, a, b)
+
+    % Gauss-Legendre
+    Gm = gauss_legendre_integral(4, a, b, f)
+
 endfunction
